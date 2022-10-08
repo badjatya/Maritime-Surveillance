@@ -31,23 +31,12 @@ const polygonOptions = {
   polyline: false,
 };
 
-const MapPage = () => {
+const MapPage = ({ center, ships }) => {
   // States
   // const [center, setCenter] = useState([13.084622, 80.248357]);
-  const [center, setCenter] = useState([-38.233562, 178.554214]);
-  const [ships, setShips] = useState([]);
   const [zoomLevel, setZoomLevel] = useState(7);
   const mapRef = useRef();
 
-  const fetchData = async () => {
-    const res = await fetch("http://localhost:5000/api/v1/ships");
-    const response = await res.json();
-    setShips(response.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <div>
       <MapContainer center={center} zoom={zoomLevel} ref={mapRef}>
