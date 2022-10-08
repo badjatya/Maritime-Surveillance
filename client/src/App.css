@@ -1,0 +1,52 @@
+.leaflet-container {
+  height: calc(100vh - 80px);
+  width: 100%;
+}
+
+.nav {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+}
+
+.logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo p {
+  font-size: 22px;
+  margin-left: 15px;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
+input {
+  outline: none;
+  border: 1px solid #ffa91a;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+button {
+  background: #ffa91a;
+  padding: 10px 20px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+button:hover {
+  background: #e49618cb;
+}
