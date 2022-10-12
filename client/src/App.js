@@ -5,6 +5,7 @@ import "./App.css";
 
 const App = () => {
   const [center, setCenter] = useState([-38.233562, 178.554214]);
+
   const [ships, setShips] = useState([]);
 
   const fetchData = async () => {

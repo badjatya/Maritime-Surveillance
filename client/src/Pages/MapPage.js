@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 
 // Leaflet
 import {
@@ -35,6 +35,7 @@ const MapPage = ({ center, ships }) => {
   // States
   // const [center, setCenter] = useState([13.084622, 80.248357]);
   const [zoomLevel, setZoomLevel] = useState(7);
+
   const mapRef = useRef();
 
   return (
