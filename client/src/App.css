@@ -9,6 +9,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 80px;
+  border-bottom: 1px solid #ffa91a;
 }
 
 .logo {
@@ -49,4 +50,21 @@ button {
 }
 button:hover {
   background: #e49618cb;
+}
+
+.home {
+  height: calc(100vh - 80px);
+  padding: 20px 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home .left h1 {
+  margin-bottom: 10px;
+}
+
+.home .left p {
+  margin-bottom: 20px;
 }
