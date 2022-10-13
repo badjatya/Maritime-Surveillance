@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 // Leaflet
 import {
@@ -31,18 +32,26 @@ const polygonOptions = {
   polyline: false,
 };
 
-const Ships = () => {
+const Search = () => {
   // States
-  // const [center, setCenter] = useState([13.084622, 80.248357]);
   const [zoomLevel, setZoomLevel] = useState(7);
   const [center, setCenter] = useState([-38.233562, 178.554214]);
-
   const [ships, setShips] = useState([]);
 
+  // React router dom
+  const { id } = useParams();
+
+  // Fetch Function
   const fetchData = async () => {
-    const res = await fetch("http://localhost:5000/api/v1/ships");
+    const res = await fetch(`http://localhost:5000/api/v1/ships/search/${id}`);
     const response = await res.json();
-    setShips(response.data);
+    const data = response.data;
+    if (data.length > 1) {
+      const lat = data[0].Latitude;
+      const lon = data[0].Longitude;
+      setCenter([lat, lon]);
+      setShips(data);
+    }
   };
 
   useEffect(() => {
@@ -83,4 +92,4 @@ const Ships = () => {
   );
 };
 
-export default Ships;
+export default Search;

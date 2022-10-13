@@ -2,8 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Importing Pages
-import Ships from "./Pages/Ships";
+import ShipsPage from "./Pages/ShipsPage";
 import Home from "./Pages/Home";
+import Search from "./Pages/Search";
 
 // Importing Components
 import Navbar from "./Components/Navbar";
@@ -15,7 +16,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/ships" element={<Ships />} />
+        <Route path="/ships" element={<ShipsPage />} />
+        <Route path="/ships/:id" element={<Search />} />
       </Routes>
     </div>
   );

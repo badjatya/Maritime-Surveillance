@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ship from "../img/ship.png";
 
@@ -7,19 +7,7 @@ const Navbar = () => {
   // States
   const [shipId, setShipId] = useState("");
   const [valid, setValid] = useState(false);
-
-  // Fetch Function
-  const fetchData = async (id) => {
-    const res = await fetch(`http://localhost:5000/api/v1/ships/search/${id}`);
-    const response = await res.json();
-    const data = response.data;
-    if (data.length > 1) {
-      const lat = data[0].Latitude;
-      const lon = data[0].Longitude;
-      // setCenter([lat, lon]);
-      // setShips(data);
-    }
-  };
+  const navigate = useNavigate();
 
   // Change Function
   const onChangeInput = (e) => {
@@ -34,8 +22,8 @@ const Navbar = () => {
     if (!shipId) {
       setValid(true);
     }
-    fetchData(shipId);
     setShipId("");
+    navigate(`/ships/${shipId}`);
   };
 
   return (
@@ -46,7 +34,7 @@ const Navbar = () => {
       </Link>
       <div className="inputContainer">
         <Link to="/">Home</Link>
-        <Link to="/ship">Ships</Link>
+        <Link to="/ships">Ships</Link>
         <input
           type="text"
           placeholder="Enter Ship ID"
