@@ -31,7 +31,7 @@ const polygonOptions = {
   polyline: false,
 };
 
-const MapPage = () => {
+const Ships = () => {
   // States
   // const [center, setCenter] = useState([13.084622, 80.248357]);
   const [zoomLevel, setZoomLevel] = useState(7);
@@ -83,4 +83,4 @@ const MapPage = () => {
   );
 };
 
-export default MapPage;
+export default Ships;

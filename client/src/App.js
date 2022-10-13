@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Importing Pages
-import MapPage from "./Pages/MapPage";
+import Ships from "./Pages/Ships";
 import Home from "./Pages/Home";
 
 // Importing Components
@@ -15,7 +15,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/map" element={<MapPage />} />
+        <Route path="/ships" element={<Ships />} />
       </Routes>
     </div>
   );

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import ship from "../img/ship.png";
 
 const Navbar = () => {
@@ -38,11 +40,13 @@ const Navbar = () => {
 
   return (
     <div className="nav">
-      <div className="logo">
+      <Link to="/" className="logo">
         <img src={ship} alt="Logo" />
         <p>Ship</p>
-      </div>
+      </Link>
       <div className="inputContainer">
+        <Link to="/">Home</Link>
+        <Link to="/ship">Ships</Link>
         <input
           type="text"
           placeholder="Enter Ship ID"
