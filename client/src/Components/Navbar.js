@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ship from "../img/ship.png";
 
-const Navbar = ({ setCenter, setShips }) => {
+const Navbar = () => {
   // States
   const [shipId, setShipId] = useState("");
   const [valid, setValid] = useState(false);
@@ -14,8 +14,8 @@ const Navbar = ({ setCenter, setShips }) => {
     if (data.length > 1) {
       const lat = data[0].Latitude;
       const lon = data[0].Longitude;
-      setCenter([lat, lon]);
-      setShips(data);
+      // setCenter([lat, lon]);
+      // setShips(data);
     }
   };
 

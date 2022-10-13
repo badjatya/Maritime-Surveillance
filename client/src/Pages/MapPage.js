@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 // Leaflet
 import {
@@ -31,10 +31,23 @@ const polygonOptions = {
   polyline: false,
 };
 
-const MapPage = ({ center, ships }) => {
+const MapPage = () => {
   // States
   // const [center, setCenter] = useState([13.084622, 80.248357]);
   const [zoomLevel, setZoomLevel] = useState(7);
+  const [center, setCenter] = useState([-38.233562, 178.554214]);
+
+  const [ships, setShips] = useState([]);
+
+  const fetchData = async () => {
+    const res = await fetch("http://localhost:5000/api/v1/ships");
+    const response = await res.json();
+    setShips(response.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const mapRef = useRef();
 
