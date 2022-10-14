@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import MapPrint from "../Components/MapPrint";
 
 // Leaflet
 import {
@@ -50,6 +51,7 @@ const ShipsPage = () => {
   }, []);
 
   const mapRef = useRef();
+  const printControlRef = useRef();
 
   return (
     <div>
@@ -64,6 +66,20 @@ const ShipsPage = () => {
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        <MapPrint
+          position="topleft"
+          sizeModes={["Current", "A4Portrait", "A4Landscape"]}
+          hideControlContainer={false}
+          title="Print"
+        />
+        <MapPrint
+          position="topleft"
+          sizeModes={["Current", "A4Portrait", "A4Landscape"]}
+          hideControlContainer={false}
+          title="Export as PNG"
+          exportOnly
         />
 
         {ships.map((ship) => (

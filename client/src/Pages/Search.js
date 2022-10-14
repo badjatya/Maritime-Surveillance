@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import MapPrint from "../Components/MapPrint";
 import { useParams } from "react-router-dom";
 
 // Leaflet
@@ -73,6 +74,20 @@ const Search = () => {
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        <MapPrint
+          position="topleft"
+          sizeModes={["Current", "A4Portrait", "A4Landscape"]}
+          hideControlContainer={false}
+          title="Print"
+        />
+        <MapPrint
+          position="topleft"
+          sizeModes={["Current", "A4Portrait", "A4Landscape"]}
+          hideControlContainer={false}
+          title="Export as PNG"
+          exportOnly
         />
 
         {ships.map((ship) => (
