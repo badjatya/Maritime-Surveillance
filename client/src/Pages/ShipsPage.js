@@ -23,7 +23,7 @@ const markerIcon = new leaflet.Icon({
 });
 
 // Polygon create function and options
-const _created = (e) => console.log(e);
+
 const polygonOptions = {
   rectangle: false,
   circle: false,
@@ -37,6 +37,7 @@ const ShipsPage = () => {
   // const [center, setCenter] = useState([13.084622, 80.248357]);
   const [zoomLevel, setZoomLevel] = useState(7);
   const [center, setCenter] = useState([-38.233562, 178.554214]);
+  const _created = (e) => console.log(e.layer.editing.latlngs);
 
   const [ships, setShips] = useState([]);
 
@@ -91,6 +92,8 @@ const ShipsPage = () => {
             <Popup>
               <p>Ship ID: {ship.Ship_ID}</p>
               <p>Ship Speed: {ship.Speed}</p>
+              <p>Latitude: {ship.Latitude}</p>
+              <p>Longitude: {ship.Longitude}</p>
             </Popup>
           </Marker>
         ))}
