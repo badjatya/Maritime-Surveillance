@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import MapPrint from "../Components/MapPrint";
 
 // Leaflet
@@ -37,9 +38,17 @@ const ShipsPage = () => {
   // const [center, setCenter] = useState([13.084622, 80.248357]);
   const [zoomLevel, setZoomLevel] = useState(7);
   const [center, setCenter] = useState([-38.233562, 178.554214]);
-  const _created = (e) => console.log(e.layer.editing.latlngs);
-
   const [ships, setShips] = useState([]);
+
+  const _created = async (e) => {
+    const inputData = e.layer.editing.latlngs;
+    const response = await axios.post(
+      "http://localhost:5000/api/v1/ships/polygon",
+      inputData
+    );
+    console.log(response.data.aisData);
+    setShips(response.data.aisData);
+  };
 
   const fetchData = async () => {
     const res = await fetch("http://localhost:5000/api/v1/ships");

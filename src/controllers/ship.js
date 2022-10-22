@@ -50,3 +50,43 @@ exports.getShipByShipId = async (req, res) => {
     });
   }
 };
+
+exports.getShipsByPolygonInput = async (req, res) => {
+  try {
+    const body = req.body[0][0];
+    const length = body.length;
+    let latitude = 0;
+    let longitude = 0;
+
+    for (let i = 0; i < body.length; i++) {
+      latitude += body[i].lat;
+      longitude += body[i].lng;
+    }
+
+    const startLat = (latitude / length).toFixed(2) + 1;
+    const startLng = (longitude / length).toFixed(2);
+    const endLat = startLat > 0 ? startLat + 1 : startLat - 1;
+    const endLng = startLng > 0 ? startLng + 1 : startLng - 1;
+
+    const aisData = await AIS.find({
+      Latitude: { $gte: endLat, $lt: startLat },
+      Longitude: { $gte: startLng, $lt: endLng },
+    });
+
+    console.log("Start Latitude: " + startLat);
+    console.log("End Latitude: " + endLat);
+    console.log("Start Longitude: " + startLng);
+    console.log("End Longitude: " + endLng);
+
+    res.status(200).json({
+      status: "success",
+      aisData,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: "Internal server error",
+      message: "Please try again",
+    });
+  }
+};
