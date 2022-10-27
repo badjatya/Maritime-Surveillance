@@ -35,9 +35,8 @@ const polygonOptions = {
 
 const ShipsPage = () => {
   // States
-  // const [center, setCenter] = useState([13.084622, 80.248357]);
-  const [zoomLevel, setZoomLevel] = useState(7);
-  const [center, setCenter] = useState([-38.233562, 178.554214]);
+  const [zoomLevel, setZoomLevel] = useState(5);
+  const [center, setCenter] = useState([-8.164333000000001, 151.232697]);
   const [ships, setShips] = useState([]);
 
   const _created = async (e) => {
@@ -46,7 +45,6 @@ const ShipsPage = () => {
       "http://localhost:5000/api/v1/ships/polygon",
       inputData
     );
-    console.log(response.data.aisData);
     setShips(response.data.aisData);
   };
 
