@@ -1,23 +1,6 @@
 // Importing Models
 const AIS = require("../models/ais");
 
-exports.getShips = async (req, res) => {
-  try {
-    const aisData = await AIS.find({}).limit(20);
-    res.status(200).json({
-      status: "success",
-      results: aisData.length,
-      data: aisData,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "error",
-      error: "Internal server error",
-      message: "Please try again",
-    });
-  }
-};
-
 exports.getShipById = async (req, res) => {
   try {
     const aisData = await AIS.findById(req.params.id);
@@ -63,14 +46,14 @@ exports.getShipsByPolygonInput = async (req, res) => {
       longitude += body[i].lng;
     }
 
-    const startLat = (latitude / length).toFixed(2) + 1;
-    const startLng = (longitude / length).toFixed(2);
+    const startLat = latitude / length + 1;
+    const startLng = longitude / length;
     const endLat = startLat > 0 ? startLat + 1 : startLat - 1;
     const endLng = startLng > 0 ? startLng + 1 : startLng - 1;
 
     const aisData = await AIS.find({
-      Latitude: { $gte: endLat, $lt: startLat },
-      Longitude: { $gte: startLng, $lt: endLng },
+      Latitude: { $gte: endLat, $lte: startLat },
+      Longitude: { $gte: startLng, $lte: endLng },
     });
 
     console.log("Start Latitude: " + startLat);
@@ -81,6 +64,24 @@ exports.getShipsByPolygonInput = async (req, res) => {
     res.status(200).json({
       status: "success",
       aisData,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: "Internal server error",
+      message: "Please try again",
+    });
+  }
+};
+
+exports.getShips = async (req, res) => {
+  try {
+    const distinctShips = await AIS.find({}).distinct("Ship_ID");
+    const data = await AIS.find({ Ship_ID: { $in: distinctShips } }).limit(20);
+    res.status(200).json({
+      status: "success",
+      results: data.length,
+      data,
     });
   } catch (error) {
     res.status(500).json({
